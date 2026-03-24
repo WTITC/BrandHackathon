@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { 
   Zap, ChevronRight, Lock, Globe, Lightbulb, 
   ShieldCheck, RefreshCw, TrendingUp, Award, 
@@ -10,6 +11,11 @@ import {
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { AnnouncementModal } from "@/components/AnnouncementModal";
+import img1 from "@/assets/poster.jpeg";
+import img2 from "@/assets/Torch.jpeg";
+import img3 from "@/assets/minister.jpeg";
+import img4 from "@/assets/sports.jpeg";
+import img5 from "@/assets/news.png";
 
 const tickerData = [
   { label: "Ministry of Commerce and Industry", type: "Legal" },
@@ -26,15 +32,10 @@ const tickerData = [
   { label: "Cyber Security", type: "Track" }
 ];
 
-const galleryImages = [
-  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
-];
+const galleryImages = [img1, img2, img3, img4, img5];
 
 const Index = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
   return (
     <Layout>
       <AnnouncementModal />
@@ -72,10 +73,15 @@ const Index = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-xl font-bold text-base uppercase shadow-lg shadow-blue-600/20">
-                    <Link to="/platform" className="flex items-center gap-2">Explore Platform <ChevronRight className="w-4 h-4" /></Link>
                   </Button>
                   <Button asChild variant="outline" className="bg-white text-black hover:bg-zinc-200 border-none px-8 py-6 rounded-xl font-bold text-base uppercase">
-                    <Link to="/register">Register Now</Link>
+                    <a
+  href="https://bit.ly/4lKneZo"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Register Now
+</a>
                   </Button>
                 </div>
               </motion.div>
@@ -179,21 +185,52 @@ const Index = () => {
           </div>
 
           {/* 5. IMAGE CAROUSEL */}
-          <div className="mb-16">
-            <div className="flex items-center gap-2 mb-6">
-              <Camera className="w-4 h-4 text-zinc-400" />
-              <h2 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Platform Snapshot</h2>
-            </div>
-            <div className="overflow-hidden relative rounded-2xl border border-zinc-100 py-4">
-              <motion.div className="flex gap-4" animate={{ x: ["0%", "-100%"] }} transition={{ repeat: Infinity, duration: 30, ease: "linear" }}>
-                {[...galleryImages, ...galleryImages].map((img, i) => (
-                  <div key={i} className="min-w-[260px] md:min-w-[300px] h-[180px] md:h-[200px] rounded-xl overflow-hidden shadow-sm flex-shrink-0">
-                    <img src={img} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="Hackathon Event" />
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
+          <div className="mb-16 relative">
+  <div className="flex items-center gap-2 mb-6">
+    <Camera className="w-4 h-4 text-zinc-400" />
+    <h2 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+      Platform Snapshot
+    </h2>
+  </div>
+  
+
+  {/* Moving Images */}
+  <div className="overflow-hidden relative rounded-2xl border border-zinc-100 py-4">
+    <motion.div
+      className="flex gap-4"
+      animate={{ x: ["0%", "-100%"] }}
+      transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+    >
+      {[...galleryImages, ...galleryImages].map((img, i) => (
+        <div
+          key={i}
+          className="min-w-[260px] md:min-w-[300px] h-[180px] md:h-[200px] rounded-xl overflow-hidden shadow-sm flex-shrink-0 cursor-pointer"
+          onClick={() => setSelectedImage(img)}
+        >
+          <img
+            src={img}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+      ))}
+    </motion.div>
+  </div>
+  <div className="text-center mt-8">
+</div>
+
+  {/* Popup Image */}
+  {selectedImage && (
+    <div
+      className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+      onClick={() => setSelectedImage(null)}
+    >
+      <img
+        src={selectedImage}
+        className="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl"
+      />
+    </div>
+  )}
+</div>
 
           {/* 6. WHO HACKATHON® SERVES */}
           <div className="pt-4">

@@ -342,10 +342,12 @@ const PastEvents = () => {
               size="xl"
               className="bg-black text-white hover:bg-white hover:text-black border border-black transition-all rounded-none"
             >
-              <Link to="/register">
-                Register Now
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+             <a
+  href="https://bit.ly/4lKneZo"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center"
+>Register Now</a>
             </Button>
           </motion.div>
         </div>
