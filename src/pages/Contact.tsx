@@ -54,9 +54,9 @@ const contactNodes = [
     id: "N-01",
     icon: Mail,
     title: "Support Email",
-    content: "TGbrandhackathon",
+    content: "TG@brandhackathon.com",
     meta: "Primary Node",
-    link: "mailto:hackathon@wtitc.org",
+    link: "mailto:TG@brandhackthon.com",
   },
   {
     id: "N-02",
